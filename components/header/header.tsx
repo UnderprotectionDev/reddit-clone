@@ -1,12 +1,12 @@
 "use client";
 
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import ReddishLogo from "@/public/images/Reddish Full.png";
 import ReddishLogoOnly from "@/public/images/Reddish Logo Only.png";
 import Image from "next/image";
 import { ChevronLeftIcon, MenuIcon } from "lucide-react";
-import { useSidebar } from "./ui/sidebar";
+import { useSidebar } from "@/components/ui/sidebar";
 
 export const Header = () => {
   const { toggleSidebar, open, isMobile } = useSidebar();
@@ -15,10 +15,9 @@ export const Header = () => {
     <header className="flex items-center justify-between p-4 border-b border-gray-200">
       {/* Left Side */}
       <div className="flex items-center h-10 ">
-        {open && !isMobile ? (
+        {open && !isMobile ?
           <ChevronLeftIcon className="w-6 h-6" onClick={toggleSidebar} />
-        ) : (
-          <div className="flex items-center gap-2">
+        : <div className="flex items-center gap-2">
             <MenuIcon className="w-6 h-6" onClick={toggleSidebar} />
             <Image
               src={ReddishLogo}
@@ -35,7 +34,7 @@ export const Header = () => {
               className="block md:hidden"
             />
           </div>
-        )}
+        }
       </div>
 
       {/* Right Side */}
