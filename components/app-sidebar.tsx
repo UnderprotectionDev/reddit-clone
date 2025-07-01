@@ -24,6 +24,7 @@ import Link from "next/link";
 import ReddishLogo from "@/public/images/Reddish Full.png";
 import Image from "next/image";
 import { getSubreddits } from "@/sanity/lib/subreddit/getSubreddits";
+import { CreateCommunityButton } from "./header/create-community-button";
 
 type SidebarData = {
   navMain: {
@@ -77,7 +78,7 @@ export async function AppSidebar({
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                {/* <CreateCommunityButton /> */}
+                <CreateCommunityButton />
               </SidebarMenuButton>
               <SidebarMenuButton asChild className="p-5">
                 <Link href="/" className="w-4 h-4">
@@ -116,7 +117,7 @@ export async function AppSidebar({
                       <Minus className="ml-auto group-data-[state=closed]/collapsible:hidden" />
                     </SidebarMenuButton>
                   </CollapsibleTrigger>
-                  {item.items?.length ? (
+                  {item.items?.length ?
                     <CollapsibleContent>
                       <SidebarMenuSub>
                         {item.items.map((item) => (
@@ -131,7 +132,7 @@ export async function AppSidebar({
                         ))}
                       </SidebarMenuSub>
                     </CollapsibleContent>
-                  ) : null}
+                  : null}
                 </SidebarMenuItem>
               </Collapsible>
             ))}
