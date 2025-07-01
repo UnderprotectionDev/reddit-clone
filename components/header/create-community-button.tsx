@@ -16,6 +16,7 @@ import { Textarea } from "../ui/textarea";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
+import { createCommunity } from "@/action/create-community";
 
 export const CreateCommunityButton = () => {
   const { user } = useUser();
@@ -97,45 +98,45 @@ export const CreateCommunityButton = () => {
 
     setErrorMessage("");
 
-    // startTransition(async () => {
-    //   try {
-    //     let imageBase64: string | null = null;
-    //     let fileName: string | null = null;
-    //     let fileType: string | null = null;
+    startTransition(async () => {
+      try {
+        let imageBase64: string | null = null;
+        let fileName: string | null = null;
+        let fileType: string | null = null;
 
-    //     if (imageFile) {
-    //       const reader = new FileReader();
-    //       imageBase64 = await new Promise<string>((resolve) => {
-    //         reader.onload = () => resolve(reader.result as string);
-    //         reader.readAsDataURL(imageFile);
-    //       });
-    //       fileName = imageFile.name;
-    //       fileType = imageFile.type;
-    //     }
+        if (imageFile) {
+          const reader = new FileReader();
+          imageBase64 = await new Promise<string>((resolve) => {
+            reader.onload = () => resolve(reader.result as string);
+            reader.readAsDataURL(imageFile);
+          });
+          fileName = imageFile.name;
+          fileType = imageFile.type;
+        }
 
-    //     const result = await createCommunity(
-    //       name.trim(),
-    //       imageBase64,
-    //       fileName,
-    //       fileType,
-    //       slug.trim(),
-    //       description.trim() || undefined
-    //     );
+        const result = await createCommunity(
+          name.trim(),
+          imageBase64,
+          fileName,
+          fileType,
+          slug.trim(),
+          description.trim() || undefined
+        );
 
-    //     console.log("Community created:", result);
+        console.log("Community created:", result);
 
-    //     if ("error" in result && result.error) {
-    //       setErrorMessage(result.error);
-    //     } else if ("subreddit" in result && result.subreddit) {
-    //       setIsOpen(false);
-    //       resetForm();
-    //       router.push(`/community/${result.subreddit.slug?.current}`);
-    //     }
-    //   } catch (err) {
-    //     console.error("Failed to create community", err);
-    //     setErrorMessage("Failed to create community");
-    //   }
-    // });
+        if ("error" in result && result.error) {
+          setErrorMessage(result.error);
+        } else if ("subreddit" in result && result.subreddit) {
+          setIsOpen(false);
+          resetForm();
+          router.push(`/community/${result.subreddit.slug?.current}`);
+        }
+      } catch (err) {
+        console.error("Failed to create community", err);
+        setErrorMessage("Failed to create community");
+      }
+    });
   };
 
   return (

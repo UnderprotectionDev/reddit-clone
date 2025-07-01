@@ -23,7 +23,7 @@ import {
 import Link from "next/link";
 import ReddishLogo from "@/public/images/Reddish Full.png";
 import Image from "next/image";
-import { getSubreddits } from "@/sanity/lib/subreddit/getSubreddits";
+import { getSubreddits } from "@/sanity/lib/subreddit/get-subreddits";
 import { CreateCommunityButton } from "./header/create-community-button";
 
 type SidebarData = {
