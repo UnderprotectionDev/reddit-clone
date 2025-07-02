@@ -1,16 +1,22 @@
-import { GetAllPostsQueryResult } from "@/sanity.types";
-import { urlFor } from "@/sanity/lib/image";
+import {
+  GetAllPostsQueryResult,
+  GetPostsForSubredditQueryResult,
+} from "@/sanity.types";
 import { getPostComments } from "@/sanity/lib/votes/get-post-comments";
 import { getPostVotes } from "@/sanity/lib/votes/get-post-votes";
 import { getUserPostVoteStatus } from "@/sanity/lib/votes/get-user-post-vote-status";
-import Image from "next/image";
 import { TimeAgo } from "../time-ago";
+import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
 import { MessageSquare } from "lucide-react";
 import { CommentInput } from "../comment/comment-input";
 import { CommentList } from "../comment/comment-list";
+import { PostVoteButtons } from "./post-vote-buttons";
 
 interface PostProps {
-  post: GetAllPostsQueryResult[number];
+  post:
+    | GetAllPostsQueryResult[number]
+    | GetPostsForSubredditQueryResult[number];
   userId: string | null;
 }
 
@@ -26,12 +32,12 @@ export const Post = async ({ post, userId }: PostProps) => {
     >
       <div className="flex">
         {/* Vote Buttons */}
-        {/* <PostVoteButtons
+        <PostVoteButtons
           contentId={post._id}
           votes={votes}
           vote={vote}
           contentType="post"
-        /> */}
+        />
 
         {/* Post Content */}
         <div className="flex-1 p-3">
