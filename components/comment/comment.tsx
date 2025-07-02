@@ -9,6 +9,7 @@ import React from "react";
 import { TimeAgo } from "../time-ago";
 import { CommentList } from "./comment-list";
 import { CommentReply } from "./comment-reply";
+import { PostVoteButtons } from "../post/post-vote-buttons";
 
 export const Comment = async ({
   postId,
@@ -22,17 +23,17 @@ export const Comment = async ({
   userId: string | null;
 }) => {
   const replies = await getCommentReplies(comment._id, userId);
-  // const userVoteStatus = comment.votes.voteStatus;
+  const userVoteStatus = comment.votes.voteStatus;
 
   return (
     <article className="py-5 border-b border-gray-100 last:border-0">
       <div className="flex gap-4">
-        {/* <PostVoteButtons
+        <PostVoteButtons
           contentId={comment._id}
           votes={comment.votes}
           vote={userVoteStatus}
           contentType="comment"
-        /> */}
+        />
 
         <div className="flex-1 space-y-2">
           <div className="flex flex-wrap items-center gap-2">
